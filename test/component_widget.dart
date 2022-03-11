@@ -8,7 +8,7 @@ import 'package:flutter/material.dart';
 import 'dart:ui' as ui;
 
 // ウィジェットとして利用する場合
-class MajoWidget extends StatelessWidget {
+class TestWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
