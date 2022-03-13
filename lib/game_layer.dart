@@ -11,7 +11,7 @@ import 'package:namakero/tree_pole.dart';
 
 import 'package:flutter/services.dart';
 
-class NamakeroGame extends FlameGame with TapDetector, KeyboardEvents {
+class GameLayer extends FlameGame with TapDetector, KeyboardEvents {
   final paint = Paint()..color = Colors.white;
 
   late Namakemono nama;
@@ -21,8 +21,6 @@ class NamakeroGame extends FlameGame with TapDetector, KeyboardEvents {
   @override
   Future<void> onLoad() async {
     await super.onLoad();
-
-    this.debugColor = Colors.yellow;
 
     // 必要な画像を先にキャッシュへ読み込んでおく
     await Flame.images.loadAll([
@@ -46,7 +44,7 @@ class NamakeroGame extends FlameGame with TapDetector, KeyboardEvents {
 
   @override
   void render(Canvas canvas) {
-    final rect = Rect.fromLTWH(0.0, 0.0, this.canvasSize.x, canvasSize.y);
+    final rect = Rect.fromLTWH(0.0, 0.0, canvasSize.x, canvasSize.y);
     canvas.drawRect(rect, paint);
     super.render(canvas);
   }

@@ -1,7 +1,7 @@
 import 'package:flame/components.dart';
 import 'package:flame/effects.dart';
 import 'package:flutter/material.dart';
-import 'package:namakero/namakemono_position.dart';
+import 'package:namakero/types/play_position.dart';
 
 class Namakemono extends SpriteComponent {
   PlayPosition playPosition = PlayPosition.leftPole;
