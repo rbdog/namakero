@@ -2,8 +2,8 @@ import 'package:flame/components.dart';
 import 'package:flame/game.dart';
 import 'package:flame/widgets.dart';
 import 'package:flutter/material.dart';
-import 'package:namakero/game_layer.dart';
-import 'package:namakero/ui_layer.dart';
+import 'package:namakero/layers/world_layer.dart';
+import 'package:namakero/layers/ui_layer.dart';
 
 main() {
   //URL取得
@@ -28,7 +28,7 @@ class MainWindow extends StatelessWidget {
       return scaffold;
     }
     // game をスコープ外に保存
-    final game = GameLayer();
+    final game = WorldLayer();
     // Layer 別Widgetにする
     final gameWidget = GameWidget(game: game);
     final center = Center(child: gameWidget);

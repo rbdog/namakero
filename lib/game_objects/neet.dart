@@ -1,17 +1,28 @@
 import 'package:flame/components.dart';
 import 'package:flame/effects.dart';
+import 'package:flame/geometry.dart';
 import 'package:flutter/material.dart';
+import 'package:namakero/game_objects/item_book.dart';
+import 'package:namakero/layers/world_layer.dart';
+import 'package:namakero/types/phase.dart';
 import 'package:namakero/types/play_position.dart';
 
-class Namakemono extends SpriteComponent {
+class Neet extends SpriteComponent with HasHitboxes, Collidable {
   PlayPosition playPosition = PlayPosition.leftPole;
   final double fallSpeed = 150;
 
-  Namakemono() : super(size: Vector2.all(128));
+  Neet() : super(size: Vector2.all(128));
 
   Future<void> onLoad() async {
-    sprite = await Sprite.load('namakemono.png');
+    sprite = await Sprite.load('neet.png');
     anchor = Anchor.center;
+    final shape = HitboxPolygon([
+      Vector2(0, 1),
+      Vector2(1, 0),
+      Vector2(0, -1),
+      Vector2(-1, 0),
+    ]);
+    addHitbox(shape);
   }
 
   @override
@@ -24,8 +35,10 @@ class Namakemono extends SpriteComponent {
 
   @override
   void update(double dt) {
-    if (position.y < 700) {
-      position.y += fallSpeed * dt;
+    if (isPlaying()) {
+      if (position.y < 700) {
+        position.y += fallSpeed * dt;
+      }
     }
   }
 
@@ -68,5 +81,16 @@ class Namakemono extends SpriteComponent {
     add(effect);
     add(vEffect1);
     add(vEffect2);
+  }
+
+  @override
+  void onCollision(Set<Vector2> intersectionPoints, Collidable other) {
+    if (other is ItemBook) {
+      debugPrint('本に当たりました');
+      other.removeHitbox(other.hitboxes.first);
+      phase = Phase.result;
+    } else {
+      debugPrint('本ではない物体に当たりました');
+    }
   }
 }
